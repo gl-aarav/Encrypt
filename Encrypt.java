@@ -1,98 +1,73 @@
-
-/* Aarav Goyal
- * Encrypt.java
- * 1/8/2025
- */
-
 import java.util.Scanner;
 
 public class Encrypt 
 {
-	private String line;
-	private int timesEncrypted;
+    private String original;
+    private String line;
+    private int timesEncrypted;
 
-	public Encrypt() 
-	{
-		line = "";
-		timesEncrypted = 0;
-	}
+    public Encrypt() 
+    {
+        original = "";
+        line = "";
+        timesEncrypted = 0;
+    }
 
-	public static void main(String[] args) 
-	{
-		Encrypt encrypt = new Encrypt();
-		encrypt.rotate13Times();
-	}
+    public static void main(String[] args) 
+    {
+        Encrypt encrypt = new Encrypt();
+        encrypt.rotateTimes();
+    }
 
-	public void rotate13Times() 
-	{
-		int printTimes;
-		System.out.print("\n\n\nWelcome to Encrypt.java. Please enter a word, phrase, or sentence.\n\n-> ");
-		getString();
-		System.out.print("\nHow many times do you want to encrypt the code(1-26)\n\n-> ");
-		getInt();
-		if (timesEncrypted!=0 && timesEncrypted <= 26 && timesEncrypted > 0)
-		{
-			for (int i = 1; i <= timesEncrypted; i++) 
-			{ 
-				encryptString();
-				printString(i);
-			}
-		}
-		if (timesEncrypted!=0 && timesEncrypted > 26 && timesEncrypted > 0)
-		{
-			for (int i = 1; i <= timesEncrypted%26; i++) 
-			{ 
-				encryptString();
-				printString(i);
-			}
-		}
-		else if (timesEncrypted <0)
-		{
-			for (int i = 1; i <= 26; i++) 
-			{ 
-				encryptString();
-				printString(i);
-			}
-		}
-		else
-		{
-			System.out.println("\nEncryption 1:\n" + timesEncrypted);
-		}	
-		System.out.println("\n\n\n");
-	}
+    public void rotateTimes() 
+    {
+      
+        System.out.print("\n\n\nWelcome to Encrypt.java. Please enter a word, phrase, or sentence.\n\n-> ");
+        getString();
+        System.out.print("\nHow many letter increments do you want to have in the code (1-26)?\n\n-> ");
+        getInt();
+        
+        for (int i = 1; !original.equals(line); i++) 
+        {
+            encryptString(i); // Pass 'i' to adjust encryption for each step
+            printString(i);
+        }
+        
+        System.out.println("\n\n\n");
+    }
 
-	public void getString() 
-	{
+    public void getString()
+    {
+	    Scanner in = new Scanner(System.in);
+        original = in.nextLine();
+        line = original; // Set 'line' to the original string for encryption.
+    }
+
+    public void getInt()
+    {
 		Scanner in = new Scanner(System.in);
-		line = in.nextLine();
-	}
+        timesEncrypted = in.nextInt();
+    }
 
-	public void getInt()
-	{
-		Scanner in = new Scanner (System.in);
-		timesEncrypted = in.nextInt();
-	}
+    public void encryptString(int increment)
+    {
+        String encrypted = "";
+    
+        for (int x = 0; x < line.length(); x++) 
+        {
+            char ch = line.charAt(x);
+            if (ch >= 'A' && ch <= 'Z') 
+                ch = (char) ((ch - 'A' + increment) % 26 + 'A'); // Increment by 'increment' steps
+            else if (ch >= 'a' && ch <= 'z') 
+                ch = (char) ((ch - 'a' + increment) % 26 + 'a'); // Increment by 'increment' steps
+            encrypted += ch;
+        }
+        
+        line = encrypted; // Update the line after encryption
+    }
 
-	public void encryptString() 
-	{
-		String encrypted = "";
-	
-		for (int x = 0; x < line.length(); x++) 
-		{
-			char ch = line.charAt(x);
-			if (ch >= 'A' && ch <= 'Z') 
-				ch = (char) ((ch - 'A' + 1) % 26 + 'A');
-			else if (ch >= 'a' && ch <= 'z') 
-				ch = (char) ((ch - 'a' + 1) % 26 + 'a');
-			encrypted += ch;
-		}
-		
-
-		line = encrypted; 
-	}
-
-	public void printString(int number) 
-	{
-		System.out.println("\nEncryption " + number + ":\n" + line);
-	}
+    public void printString(int number) 
+    {
+        System.out.println("\nEncryption " + number + ":\n" + line);
+    }
 }
