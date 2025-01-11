@@ -30,7 +30,7 @@ public class Encrypt
 		line = original;
 		do
 		{
-			encryptString(); // Pass 'i' to adjust encryption for each step
+			encryptString(); 
 			i++;
 			printString(i);
 		} while(!original.equals(line));
@@ -63,9 +63,9 @@ public class Encrypt
 		{
 			char ch = line.charAt(x);
 			if (ch >= 'A' && ch <= 'Z') 
-				ch = (char) ((ch - 'A' + increment) % 26 + 'A'); // Increment by 'increment' steps
+				ch = (char) ((ch - 'A' + increment) % 26 + 'A');
 			else if (ch >= 'a' && ch <= 'z') 
-				ch = (char) ((ch - 'a' + increment) % 26 + 'a'); // Increment by 'increment' steps
+				ch = (char) ((ch - 'a' + increment) % 26 + 'a'); 
 			encrypted += ch;
 		}
 		line = encrypted;
