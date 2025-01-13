@@ -24,7 +24,7 @@ public class Encrypt
 
 		System.out.print("\n\n\nWelcome to Encrypt.java. Please enter a word, phrase, or sentence.\n\n-> ");
 		getString();
-		System.out.print("\nHow many letter increments do you want to have in the code (1-26)?\n\n-> ");
+		System.out.print("\nHow many letter increments do you want to have in the code?\n\n-> ");
 		getInt();
 		int i=0;
 		line = original;
